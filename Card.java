@@ -13,6 +13,9 @@ public String getQuestion(){
 public String getAnswer(){
     return this.answer;
 }
+public int getCardNum(){return this.cardNum;}
+
+
     public Card(String question, String answer,int number){
     this.question =question;
     this.answer=answer;
