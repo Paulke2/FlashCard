@@ -45,4 +45,10 @@ public class Control {
             newDeck.updateCard();
         }
     }
+    public static void main(String[] args) throws IOException {
+        System.out.println("Starting");
+        Continue();
+
+
+    }
 }
