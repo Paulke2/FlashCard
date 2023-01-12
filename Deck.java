@@ -1,15 +1,16 @@
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Deck {
 
     static Scanner scr = new Scanner(System.in);
     ArrayList<Card> deck = new ArrayList<>();
     public int cardNum = 1;
 
-    public Deck(ArrayList<Card> deck,int cardNum){
+    public Deck(ArrayList<Card> deck, int cardNum){
         this.cardNum=cardNum;
         this.deck=deck;
     }
@@ -20,7 +21,7 @@ public class Deck {
          */
         System.out.println("type what question you want on the card then press \"enter\". if you wish to stop adding cards, make the question\"s\".");
         String question = scr.nextLine();
-        if(question=="s"){
+        if(question.equals("s")){
             return false;
         }
         System.out.println("type the answer to that question.");
@@ -76,7 +77,7 @@ public class Deck {
         String update = "";
         String CardName = "";
         int cardIndex = 0;
-        while (CardName == "") {
+        while (CardName.equals( "")) {
             System.out.println("please type out the question on the card you wish to modify.");
             update = scr.nextLine();
             int deckSize = this.deck.size();
@@ -92,13 +93,13 @@ public class Deck {
 
         }
         String input = "";
-        while (!(input == "a" || input == "q")) {
+        while (!(input.equals("a") || input.equals("q"))) {
             System.out.println("enter \"q\" to modify the question and \"a\"to modify the answer");
             input = scr.next();
         }
         String oldQuestion = this.deck.get(cardIndex).getQuestion();
         String oldAnswer = this.deck.get(cardIndex).getAnswer();
-        if (input == "a") {
+        if (input.equals("a")) {
             System.out.println("what do you wish the question to to changed to?");
 
             input = scr.nextLine();
