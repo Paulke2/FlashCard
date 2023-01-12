@@ -4,8 +4,10 @@ import java.io.IOException;
 public class Control {
     static Scanner scr = new Scanner(System.in);
 
+    public Control(){
 
-    static String getNextAction(){
+    }
+    public String getNextAction(){
         /**
          * this method gets users next action
          */
@@ -20,7 +22,7 @@ public class Control {
 
    return input;
     }
-    static void Continue() throws IOException {
+    public void Continue() throws IOException {
         /**this method gets input from get next action and if its n,(new card) it will continue until the question matches u,p, or s
         **/
         ArrayList<Card> deck=new ArrayList<Card>();
@@ -47,7 +49,8 @@ public class Control {
     }
     public static void main(String[] args) throws IOException {
         System.out.println("Starting");
-        Continue();
+        Control controller = new Control();
+        controller.Continue();
 
 
     }
