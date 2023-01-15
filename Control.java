@@ -35,11 +35,14 @@ public class Control {
         String input = getNextAction();
         String question;
         String answer;
-        System.out.println("got here");
+
         if (input.equals("n")){
             boolean add=true;
             while(add==true){
                 add=newDeck.AddCard();
+                newDeck.cardNum++;
+                newDeck.PrintDeck();
+                System.out.println("should print cards");
             }
         }
         if(input.equals("p")){

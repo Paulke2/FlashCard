@@ -36,9 +36,10 @@ public class Deck {
          * this prints the current deck to the console
          */
         int temp = this.cardNum;
-        while (temp - 1 > 0) {
+        while (temp - 1 >= 0) {
             Card currCard = this.deck.get(temp - 1);
             System.out.println("---------------------------------------------");
+            System.out.println("Card number "+temp);
             System.out.println("question: ");
             System.out.println(currCard.getQuestion());
             System.out.println("||||||||||||||||||||||||||||||||||");
