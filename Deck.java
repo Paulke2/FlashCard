@@ -57,20 +57,47 @@ public class Deck {
         System.out.println("creating a study guide. What should the file name be?");
         String fileName = scr.nextLine();
         fileName = fileName + ".txt";
+        System.out.println("what class is this for/what test?(this will be printed at the head of your file.");
+        String headerName = scr.nextLine();
         File studyGuide = new File(fileName);
+        System.out.println("path:" + studyGuide.getAbsolutePath());
         //now writing to file.
-        FileWriter cardAdder = new FileWriter(fileName);
+        // FileWriter cardAdder = new FileWriter(studyGuide);
 
-        int temp = this.cardNum;
-        while (temp - 1 > 0) {
-            Card currCard = this.deck.get(temp - 1);
-            cardAdder.write(temp + (")") + "\n");
-            cardAdder.write("Q. " + currCard.getQuestion());
-            cardAdder.write("A. " + currCard.getAnswer());
-            temp--;
+        int temp = this.deck.size();
+        FileWriter Sheet = new FileWriter(fileName);
+        int count =0;
+        for (int i = 0; i < headerName.length(); i++){
+            Sheet.write(headerName.charAt(i));
+
         }
-    }
 
+        while (count<temp) {
+
+            Card currCard = this.deck.get(count);
+            count++;
+
+            String a ="A)";
+            String q ="Q" +count+")";
+            q=q+ currCard.getQuestion();
+            a =a+ currCard.getAnswer();
+
+            Sheet.write('\n');
+
+            for (int i = 0; i < q.length(); i++){
+                Sheet.write(q.charAt(i));
+
+            }
+            Sheet.write('\n');
+
+            for (int i = 0; i < a.length(); i++){
+                Sheet.write(a.charAt(i));
+
+            }
+
+        }
+        Sheet.close();
+    }
     public void updateCard() {
         /**
          * this methods finds a card and updates it
