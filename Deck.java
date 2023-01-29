@@ -35,8 +35,8 @@ public class Deck {
         /**
          * this prints the current deck to the console
          */
-        int temp = this.cardNum;
-        while (temp - 1 >= 0) {
+        int temp = 1;
+        while (temp <= this.cardNum) {
             Card currCard = this.deck.get(temp - 1);
             System.out.println("---------------------------------------------");
             System.out.println("Card number "+temp);
@@ -46,7 +46,7 @@ public class Deck {
             System.out.println("answer: ");
             System.out.println(currCard.getAnswer());
             System.out.println("---------------------------------------------");
-            temp--;
+            temp++;
         }
     }
 
@@ -81,7 +81,7 @@ public class Deck {
             String q ="Q" +count+")";
             q=q+ currCard.getQuestion();
             a =a+ currCard.getAnswer();
-
+            Sheet.write('\n');
             Sheet.write('\n');
 
             for (int i = 0; i < q.length(); i++){
@@ -102,43 +102,63 @@ public class Deck {
         /**
          * this methods finds a card and updates it
          */
+        Deck OurDeck= new Deck(this.deck,this.deck.size());
         String update = "";
         String CardName = "";
         int cardIndex = 0;
-        while (CardName.equals( "")) {
-            System.out.println("please type out the question on the card you wish to modify.");
+        while (CardName.equals("")) {
+            System.out.println("please type out the question or card number of the card you wish to modify.");
             update = scr.nextLine();
             int deckSize = this.deck.size();
 
-            //perhaps hash all cards to make update card faster
-            for (int i = 0; i < deckSize; i++) {
-                if (update == this.deck.get(i).getQuestion()) {
-                    CardName = update;
-                    cardIndex = this.deck.get(i).getCardNum();
-                    break;
+            if (update.charAt(0) > '0' || update.charAt(0) < '9') {
+                String SNum = "" + update.charAt(0);
+                //now we need to loop until condition for ints is false.
+                int i = 1;
+                while ( i <update.length()) {
+                    SNum = SNum + update.charAt(i);
+                    i++;
                 }
-            }
+                cardIndex = Integer.parseInt(SNum);
+                System.out.println("your card number is " + cardIndex);
+                CardName=deck.get(cardIndex-1).getQuestion();
+                //if first char is not an int, they are not giving a card num
+            } else {
+                for (int i = 0; i < deckSize; i++) {
+                    if (update == this.deck.get(i).getQuestion()) {
+                        CardName = update;
+                        cardIndex = this.deck.get(i).getCardNum();
+                        break;
+                    }
+                }
 
+
+            }
         }
+        String newA= "test";
+        String newQ="test";
         String input = "";
         while (!(input.equals("a") || input.equals("q"))) {
             System.out.println("enter \"q\" to modify the question and \"a\"to modify the answer");
             input = scr.next();
         }
-        String oldQuestion = this.deck.get(cardIndex).getQuestion();
-        String oldAnswer = this.deck.get(cardIndex).getAnswer();
-        if (input.equals("a")) {
+        String oldQuestion = this.deck.get(cardIndex-1).getQuestion();
+        String oldAnswer = this.deck.get(cardIndex-1).getAnswer();
+        Scanner NewScr = new Scanner(System.in);
+        if (input.equals("q")) {
             System.out.println("what do you wish the question to to changed to?");
 
-            input = scr.nextLine();
-            this.deck.get(cardIndex).setQuestion(input);
-            System.out.println("changed card number " + cardIndex + " question from " + oldQuestion + " to " + input);
+            newQ = NewScr.nextLine();
+            this.deck.get(cardIndex-1).setQuestion(newQ);
+            System.out.println("changed card number " + cardIndex + " question from " + oldQuestion + " to " + newQ);
+            OurDeck.PrintDeck();
         } else {
             System.out.println("what do you wish the answer to to changed to?");
 
-            input = scr.nextLine();
-            this.deck.get(cardIndex).setQuestion(input);
-            System.out.println("changed card number " + cardIndex + " answer from " + oldAnswer + " to " + input);
+            newA = NewScr.nextLine();
+            this.deck.get(cardIndex-1).setAnswer(newA);
+            System.out.println("changed card number " + cardIndex + " answer from " + oldAnswer + " to " + newA);
+            OurDeck.PrintDeck();
         }
 
     }
