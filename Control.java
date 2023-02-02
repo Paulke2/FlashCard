@@ -12,13 +12,13 @@ public class Control {
         /**
          * this method gets users next action.
          */
-        System.out.println("enter \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards,\n \"r\" to read cards from an existing text file and \"s\" to create a study sheet from the current cards.");
+        System.out.println("enter  \"start\" to go through your cards, \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards,\n \"r\" to read cards from an existing text file and \"s\" to create a study sheet from the current cards.");
         String input = scr.next();
-        while(!(input.equals("n")||input.equals("p")||input.equals("s")||input.equals("u")||input.equals("r"))){
+        while(!(input.equals("n")||input.equals("p")||input.equals("s")||input.equals("u")||input.equals("r")||input.equals("Start")||input.equals("start"))){
 
 
             System.out.println("please give a valid input. you said "+input);
-            System.out.println("again the options are \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards,\n \"r\" to read cards from an existing text file and \"s\" to create a study sheet from the current cards.");
+            System.out.println("again the options are \"start\" to go through your cards, \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards,\n \"r\" to read cards from an existing text file and \"s\" to create a study sheet from the current cards.");
             input =scr.nextLine();
 
             System.out.println("test "+input);
@@ -66,6 +66,13 @@ public class Control {
             }
             if (input.equals("u")) {
                 newDeck.updateCard();
+            }
+            if (input.equals("start")||input.equals("Start")) {
+                if(newDeck.cardNum>=1) {
+                    newDeck.play();
+                }else{
+                    System.out.println("please add more cards before starting ");
+                }
             }
 
             determine_End=End();

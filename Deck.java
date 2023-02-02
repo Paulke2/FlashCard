@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Deck {
@@ -75,8 +76,8 @@ public class Deck {
             Card currCard = this.deck.get(count);
             count++;
 
-            String a ="A)";
-            String q ="Q" +count+")";
+            String a ="A) ";
+            String q ="Q" +count+") ";
             q=q+ currCard.getQuestion();
             a =a+ currCard.getAnswer();
             Sheet.write('\n');
@@ -126,10 +127,12 @@ public class Deck {
         while(fileScan.hasNextLine()){
 
             if(fileScan.next().charAt(0)=='Q'){
+                fileScan.skip(" ");
                 Question=fileScan.nextLine();
 
             }
             if(fileScan.next().charAt(0)=='A'){
+                fileScan.skip(" ");
                 String Answer=fileScan.nextLine();
                 //now create a new card
                 ;
@@ -183,8 +186,8 @@ public class Deck {
 
             }
         }
-        String newA= "test";
-        String newQ="test";
+        String newA= "";
+        String newQ="";
         String input = "";
         while (!(input.equals("a") || input.equals("q"))) {
             System.out.println("enter \"q\" to modify the question and \"a\"to modify the answer");
@@ -208,6 +211,29 @@ public class Deck {
             System.out.println("changed card number " + cardIndex + " answer from " + oldAnswer + " to " + newA);
             OurDeck.PrintDeck();
         }
+
+    }
+    public void play(){
+        ArrayList<Card> Temp = this.deck;
+        boolean[] cardsUsed = new boolean[cardNum];
+        int cardCount=0;
+
+        while(cardNum>0){
+            Random NumFinder = new Random();
+            int currCard=NumFinder.nextInt(cardNum);
+            System.out.println(Temp.get(currCard).getQuestion());
+            System.out.println("Type out the answer ");
+            String userA=scr.nextLine();
+
+            if(userA.equals(Temp.get(currCard).getAnswer())){
+                Temp.remove(currCard);
+                cardNum--;
+                System.out.println("correct");
+            }else{
+                System.out.println("wrong. correct answer is: "+Temp.get(currCard).getAnswer());
+            }
+        }
+
 
     }
 }
