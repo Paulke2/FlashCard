@@ -12,13 +12,13 @@ public class Control {
         /**
          * this method gets users next action.
          */
-        System.out.println("enter \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards, and \"s\" to create a study sheet from the current cards.");
+        System.out.println("enter \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards,\n \"r\" to read cards from an existing text file and \"s\" to create a study sheet from the current cards.");
         String input = scr.next();
-        while(!(input.equals("n")||input.equals("p")||input.equals("s")||input.equals("u"))){
+        while(!(input.equals("n")||input.equals("p")||input.equals("s")||input.equals("u")||input.equals("r"))){
 
 
             System.out.println("please give a valid input. you said "+input);
-            System.out.println("again the options are \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards, and \"s\" to create a study sheet from the current cards.");
+            System.out.println("again the options are \"n\" to make a new card, \"u\" to update an existing card, \"p\" to print the current list of cards,\n \"r\" to read cards from an existing text file and \"s\" to create a study sheet from the current cards.");
             input =scr.nextLine();
 
             System.out.println("test "+input);
@@ -53,6 +53,11 @@ public class Control {
 
 
             }
+            if(input.equals("r")){
+                newDeck.readFile();
+                System.out.println("Printing new Deck");
+                newDeck.PrintDeck();
+            }
             if (input.equals("p")) {
                 newDeck.PrintDeck();
             }
@@ -70,6 +75,13 @@ public class Control {
             }
         }
         newDeck.CreateSheet();
+
+    }
+    public void readFile(){
+        /**
+         * this method will read a file with the format of Q) gets card 1 Q '\n' A)gets card 1 A '\n' '\n' creates new card
+         */
+
 
     }
     public static boolean End(){
@@ -90,6 +102,9 @@ public class Control {
         return true;
 
     }
+
+
+
     public static void main(String[] args) throws IOException {
         System.out.println("Starting");
         Control controller = new Control();

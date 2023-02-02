@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -98,6 +96,56 @@ public class Deck {
         }
         Sheet.close();
     }
+
+    public void readFile() throws IOException {
+        /**
+         * this method will read a file with the format of Q) gets card 1 Q '\n' A)gets card 1 A '\n' '\n' creates new card
+         */
+        System.out.println("Enter the name of the .txt file");
+        String fileName = scr.nextLine();
+        fileName=fileName +".txt";
+
+        File oldFile=new File(fileName);
+
+        //until a good file is entered
+        while(!(oldFile.exists()!=false)){
+            System.out.println("no file found");
+            System.out.println("Enter the name of the .txt file");
+            fileName = scr.nextLine();
+            fileName=fileName +".txt";
+
+            oldFile=new File(fileName);
+        }
+        Scanner fileScan=new Scanner(oldFile);
+
+        System.out.println("got past while ");
+        int count=1;
+
+        String Question="";
+
+        while(fileScan.hasNextLine()){
+
+            if(fileScan.next().charAt(0)=='Q'){
+                Question=fileScan.nextLine();
+
+            }
+            if(fileScan.next().charAt(0)=='A'){
+                String Answer=fileScan.nextLine();
+                //now create a new card
+                ;
+                Card Creating=new Card(Question,Answer,count);
+
+                this.deck.add(Creating);
+                count++;
+                this.cardNum++;
+            }
+
+
+        }
+
+
+    }
+
     public void updateCard() {
         /**
          * this methods finds a card and updates it
